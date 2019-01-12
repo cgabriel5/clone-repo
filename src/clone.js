@@ -38,63 +38,52 @@ module.exports = info => {
 	// Run command.
 	const cprocess = spawn("git", command);
 
-	// log(`${chalk.gray("$ git " + command.join(" "))}`);
-
 	// -- Process Events --//
 
 	// Store all std messages for later use.
 	let messages = [];
 
 	cprocess.stderr.on("data", data => {
-		messages.push(data.toString().trim());
+		// Make each line of the each message be on its own line.
+		let lines = data
+			.toString()
+			.trim()
+			.split("\n");
+
+		// Add it line to the messages array.
+		for (let i = 0, l = lines.length; i < l; i++) {
+			let line = lines[i].trim();
+			if (line.length) {
+				messages.push(line);
+			}
+		}
 	});
 	cprocess.on("close", () => {
 		// Combine messages.
 		let message = messages.join("\n");
 
-		// Checks:
-		// - Repo already exists.
-		// - Repo doesn't exist (wrong username/repo-name).
-		// - Rebo branch doesn't exist.
-		// - SSH:
-		// 	 - missing key checks
-		// - Clone success.
+		// Add custom message for successful/failed cloning.
+		if (message.includes("fatal") || message.includes("error")) {
+			// Give tip if using ssh failed for possible resolution.
+			if (
+				protocol === "ssh" &&
+				(message.includes("ssh") ||
+					message.includes("key") ||
+					message.includes("verification"))
+			) {
+				messages.push(
+					`tip: ensure your public key is in ${service} to properly use ssh.`
+				);
+			}
 
-		if (message.includes("empty directory") && message.includes("exists")) {
-			message = `A directory ${chalk.bold(
-				repo
-			)}/ already exists in current directory.`;
-		} else if (
-			message.includes("remote repository") &&
-			message.includes("read") &&
-			message.includes("not found")
-		) {
-			message = `Repo ${chalk.bold(
-				`${username}/${repo}`
-			)} seems to not exist.`;
-		} else if (
-			message.includes("remote branch") &&
-			message.includes("find") &&
-			message.includes("not found")
-		) {
-			message = `Repo branch ${chalk.bold(branch)} doesn't exist.`;
-		} else if (
-			message.includes("denied") &&
-			message.includes("publickey") &&
-			protocol === "ssh"
-		) {
-			message = `Missing SSH key. Ensure your public key is in ${service} to use ssh.`;
-		} else if (
-			message.includes("key") &&
-			message.includes("verification") &&
-			message.includes("failed") &&
-			protocol === "ssh"
-		) {
-			message = `Host key verification failed. Ensure your public key is in ${service} to use ssh.`;
+			messages.push(chalk.red("Cloning failed."));
 		} else {
-			message = `Cloning successful.`;
+			messages.push(chalk.green("Cloning successful."));
 		}
 
-		log(message);
+		// Log each message.
+		for (let i = 0, l = messages.length; i < l; i++) {
+			log(messages[i]);
+		}
 	});
 };
