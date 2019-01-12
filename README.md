@@ -154,6 +154,9 @@ Available parameters (_supplied via CLI - see examples_):
 ### OS Support
 
 - Made using Node.js `v8.14.0` on a Linux machine running `Ubuntu 16.04.5 LTS`.
+- Tested and working on:
+  - `macOS High Sierra (v10.13)`.
+  - `Windows 10 (v1703 OS Build: 15063.674)`.
 
 <a name="contributing"></a>
 

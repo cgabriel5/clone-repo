@@ -64,7 +64,7 @@ module.exports = info => {
 
 		// Add custom message for successful/failed cloning.
 		if (message.includes("fatal") || message.includes("error")) {
-			// Give tip if using ssh failed for possible resolution.
+			// Give tip if ssh failed for possible resolution.
 			if (
 				protocol === "ssh" &&
 				(message.includes("ssh") ||
