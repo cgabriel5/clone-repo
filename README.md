@@ -16,7 +16,7 @@
 
 ### Overview
 
-Clones a public GitHub, GitLab, or BitBucket repo from the CLI using a simple, unified API.
+Clones a public GitHub, GitLab, or BitBucket git repo from the CLI using a simple, unified API.
 
 <a name="install"></a>
 
