@@ -5,7 +5,8 @@
 - [Overview](#overview)
 - [Install](#install)
 - [How To Use](#how-to-use)
-- [API](#api)
+- [API](#API)
+- [CLI](#cli)
 - [Examples](#examples)
 - [Options](#options)
 - [OS Support](#os-support)
@@ -16,19 +17,31 @@
 
 ### Overview
 
-Clones a public GitHub, GitLab, or BitBucket git repo from the CLI using a simple, unified API.
+Clones a public GitHub, GitLab, or BitBucket git repo from the CLI using a simple, unified download scheme.
 
 <a name="install"></a>
 
 ### Install
 
-```shell
-# npm
-$ npm install -g clone-repo
-
+```sh
 # yarn
-$ yarn global add clone-repo
+$ yarn global add cgabriel5/clone-repo
+
+# npm (requires sudo)
+$ sudo npm i -g cgabriel5/clone-repo
 ```
+
+<details><summary>Uninstall?</summary>
+
+```sh
+# yarn
+$ yarn global remove clone-repo
+
+# npm (requires sudo)
+$ sudo npm uninstall -g clone-repo
+```
+
+</details>
 
 <a name="how-to-use"></a>
 
@@ -42,10 +55,16 @@ $ clone-repo myusername/mycoolrepo
 
 ### API
 
+Currently clone-repo is only a CLI tool.
+
+<a name="cli"></a>
+
+### CLI
+
 Single line representation:
 
 ```
-<protocol?><host?>@<username>/<repo><#branch?>
+$ clone-repo <protocol?><host?>@<username>/<repo><#branch?>
 ```
 
 <details>
