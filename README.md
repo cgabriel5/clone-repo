@@ -5,7 +5,7 @@
 - [Overview](#overview)
 - [Install](#install)
 - [How To Use](#how-to-use)
-- [API](#API)
+- [API](#api)
 - [CLI](#cli)
 - [Examples](#examples)
 - [Options](#options)
@@ -138,19 +138,19 @@ $ clone-repo ssh:bb@myusername/mycoolrepo#my-feature # bitbucket + ssh + branch
 ##### Renaming Repo
 
 ```shell
-$ clone-repo myusername/mycoolrepo --name anothercoolname # github + https + rename
+$ clone-repo --name anothercoolname myusername/mycoolrepo # rename + github + https
 ```
 
 ##### Specify Repo Destination
 
 ```shell
-$ clone-repo myusername/mycoolrepo --dest ~/Desktop # github + https + dest
+$ clone-repo --dest ~/Desktop myusername/mycoolrepo # dest + github + https
 ```
 
 ##### Renaming + Destination
 
 ```shell
-$ clone-repo myusername/mycoolrepo --name anothercoolname --dest ~/Desktop # github + https + rename + dest
+$ clone-repo --name anothercoolname --dest ~/Desktop myusername/mycoolrepo # rename + dest + github + https
 ```
 
 </details>
